@@ -1,7 +1,7 @@
 TetraJS
 -------------------
 
-This is a tetris web application that dimulates th famous tetris game, using js, and the audio web api.
+This is a tetris web application that simulates th famous tetris game, using js, html, css and the audio web api.
 
 
 

@@ -1,4 +1,26 @@
-.hello {
-  background-color: #efefef;
-  border: 1px solid #dedede;
+*
+{
+	padding:0;
+	margin:0;
+}
+
+#tetra-container
+{
+	width: 200px;
+	height: 400px;
+	background-color: #369;
+	line-height: 0px;
+}
+
+.mcell
+{
+	display:inline-block;
+	width: 18px;
+	height: 18px;
+	border: solid 1px #000;
+}
+
+.red
+{
+	background-color: red;
 }

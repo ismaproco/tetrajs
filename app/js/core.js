@@ -9,11 +9,16 @@
 // Create a matrix of 10 columns x 20 rows
 var drawCache = [];
 var m = {};
-for (var j = 0; j < 20; j++) {
-    for (var i = 0; i < 10; i++) {
-            m[i+'_'+j] = 0;
-    }
+
+function resetMatrix()
+{
+    for (var j = 0; j < 20; j++) {
+        for (var i = 0; i < 10; i++) {
+                m[i+'_'+j] = 0;
+        }
+    }    
 }
+
 
 // Create the tetris figures
 var figures = {};
@@ -86,9 +91,9 @@ function TTerm(){
     
     this.def[3][ 0 +"_"+ 1 ] = 1;
     
-    this.def[3][ 1 +"_"+ 0 ] = 0;
+    this.def[3][ 1 +"_"+ 0 ] = 1;
     this.def[3][ 1 +"_"+ 1 ] = 1;
-    this.def[3][ 1 +"_"+ 2 ] = 0;
+    this.def[3][ 1 +"_"+ 2 ] = 1;
 
 }
 
@@ -225,12 +230,30 @@ figures.zter = new ZTerm();
 // figureName: [oter, iter, tter, ...]
 // position: {x:0,y:0};
 
-function addFigure(figureName,position, rotation) 
+function addFigure(figureName, position, rot ) 
 {
 
-    rotation = rotation || 0;
+    var rotation = rot || 0;
+    
+    var size = {};
+    
+    if( rotation >= figures[figureName].rotations )
+    {
+        rotation = rotation % figures[figureName].rotations;
+    }
 
-    var size = figures[figureName].size;
+
+    if( rotation % 2 === 0 )
+    {
+        size = figures[figureName].size;    
+    }else
+    {
+        size = {
+            x: figures[figureName].size.y,
+            y: figures[figureName].size.x
+        };
+    }
+    
 
     // change the y position to start the draw in cartesian coordinates
     position.y -= size.y - 1;
@@ -297,13 +320,18 @@ function drawMatrixInHTML()
 $(document).ready(function(){
     drawHTMLMatrix();
 
-    addFigure('oter', {x:4,y:16} );
-    addFigure('iter', {x:4,y:10} );
-    addFigure('tter', {x:6,y:3} );
-    addFigure('lter', {x:5,y:8} );
-    addFigure('jter', {x:2,y:8} );
-    addFigure('ster', {x:5,y:13} );
-    addFigure('zter', {x:1,y:13} );
+    var rotation = 0;
+    setInterval(function(){
+        addFigure('oter', {x:4,y:16} , rotation );
+        addFigure('iter', {x:4,y:10} , rotation );
+        addFigure('tter', {x:6,y:3}, rotation );
+        addFigure('lter', {x:6,y:8}, rotation );
+        addFigure('jter', {x:2,y:5}, rotation );
+        addFigure('ster', {x:5,y:13}, rotation );
+        addFigure('zter', {x:1,y:13}, rotation );
 
-    drawMatrixInHTML();
+        rotation+=1;
+        drawMatrixInHTML();
+    },500);
+    
 });

@@ -32,77 +32,204 @@ function OTerm(){
 }
 
 figures.oter = new OTerm();
-/*
-figures.iter = (new function OTerm(){
+
+function ITerm(){
     this.size = { x:4 , y:1 };
     this.rotations = 2;
 
     this.def = [ [] , [] ];
 
-    this.def[0][ 0 , 0 ] = 1;
-    this.def[0][ 1 , 0 ] = 1;
-    this.def[0][ 2 , 0 ] = 1;
-    this.def[0][ 3 , 0 ] = 1;
+    this.def[0][ 0 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    this.def[0][ 2 +"_"+ 0 ] = 1;
+    this.def[0][ 3 +"_"+ 0 ] = 1;
 
-    this.def[1][ 0 , 0 ] = 1;
-    this.def[1][ 0 , 1 ] = 1;
-    this.def[1][ 0 , 2 ] = 1;
-    this.def[1][ 0 , 3 ] = 1;
+    this.def[1][ 0 +"_"+ 0 ] = 1;
+    this.def[1][ 0 +"_"+ 1 ] = 1;
+    this.def[1][ 0 +"_"+ 2 ] = 1;
+    this.def[1][ 0 +"_"+ 3 ] = 1;
 
-});
+}
 
-figures.tter = (new function OTerm(){
+figures.iter = new ITerm();
+
+
+function TTerm(){
     this.size = { x:3 , y:2 };
     this.rotations = 4;
 
     this.def = [ [] , [] , [] , [] ];
 
     // rotation 0
-    this.def[0][ 0 , 0 ] = 1;
-    this.def[0][ 1 , 0 ] = 1;
-    this.def[0][ 2 , 0 ] = 1;
+    this.def[0][ 0 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    this.def[0][ 2 +"_"+ 0 ] = 1;
         
-    this.def[0][ 1 , 1 ] = 1;
+    this.def[0][ 1 +"_"+ 1 ] = 1;
     
     // rotation 1
-    this.def[1][ 1 , 1 ] = 1;
+    this.def[1][ 1 +"_"+ 1 ] = 1;
 
-    this.def[1][ 0 , 0 ] = 1;
-    this.def[1][ 0 , 1 ] = 1;
-    this.def[1][ 0 , 2 ] = 1;
+    this.def[1][ 0 +"_"+ 0 ] = 1;
+    this.def[1][ 0 +"_"+ 1 ] = 1;
+    this.def[1][ 0 +"_"+ 2 ] = 1;
 
     // rotation 2
     
-    this.def[2][ 1 , 0 ] = 1;
+    this.def[2][ 1 +"_"+ 0 ] = 1;
     
-    this.def[2][ 0 , 1 ] = 1;
-    this.def[2][ 1 , 1 ] = 1;
-    this.def[2][ 2 , 1 ] = 1;
+    this.def[2][ 0 +"_"+ 1 ] = 1;
+    this.def[2][ 1 +"_"+ 1 ] = 1;
+    this.def[2][ 2 +"_"+ 1 ] = 1;
 
     // rotation 3
     
-    this.def[3][ 0 , 1 ] = 1;
+    this.def[3][ 0 +"_"+ 1 ] = 1;
     
-    this.def[3][ 1 , 0 ] = 0;
-    this.def[3][ 1 , 1 ] = 1;
-    this.def[3][ 1 , 2 ] = 0;
+    this.def[3][ 1 +"_"+ 0 ] = 0;
+    this.def[3][ 1 +"_"+ 1 ] = 1;
+    this.def[3][ 1 +"_"+ 2 ] = 0;
 
-});
+}
 
-figures.lter = {};
-figures.jter = {};
-figures.ster = {};
-figures.zter = {};
+figures.tter = new TTerm();
+
+function LTerm()
+{
+    this.size = { x:2 , y:3 };
+    this.rotations = 4;
+
+    this.def = [ [] , [] , [] , [] ];
+
+    // rotation 0
+    this.def[0][ 0 +"_"+ 0 ] = 1;
+    this.def[0][ 0 +"_"+ 1 ] = 1;
+    this.def[0][ 0 +"_"+ 2 ] = 1;
+
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    
+    // rotation 1
+    this.def[1][ 0 +"_"+ 0 ] = 1;
+
+    this.def[1][ 0 +"_"+ 1 ] = 1;
+    this.def[1][ 1 +"_"+ 1 ] = 1;
+    this.def[1][ 2 +"_"+ 1 ] = 1;
+
+    // rotation 2
+    
+    this.def[2][ 1 +"_"+ 0 ] = 1;
+    this.def[2][ 1 +"_"+ 1 ] = 1;
+    this.def[2][ 1 +"_"+ 2 ] = 1;
+
+    this.def[2][ 0 +"_"+ 2 ] = 1;
+
+    // rotation 3
+    
+    this.def[3][ 0 +"_"+ 0 ] = 1;
+    this.def[3][ 1 +"_"+ 0 ] = 1;
+    this.def[3][ 2 +"_"+ 0 ] = 1;
+
+    this.def[3][ 0 +"_"+ 1 ] = 1;
+}
+
+figures.lter = new LTerm();
+
+function JTerm()
+{
+    this.size = { x:2 , y:3 };
+    this.rotations = 4;
+
+    this.def = [ [] , [] , [] , [] ];
+
+    // rotation 0
+    this.def[0][ 0 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 1 ] = 1;
+
+    this.def[0][ 1 +"_"+ 2 ] = 1;
+    
+    // rotation 1
+    this.def[1][ 0 +"_"+ 1 ] = 1;
+
+    this.def[1][ 0 +"_"+ 0 ] = 1;
+    this.def[1][ 1 +"_"+ 0 ] = 1;
+    this.def[1][ 2 +"_"+ 0 ] = 1;
+
+    // rotation 2
+    
+    this.def[2][ 0 +"_"+ 0 ] = 1;
+    this.def[2][ 0 +"_"+ 1 ] = 1;
+    this.def[2][ 0 +"_"+ 2 ] = 1;
+
+    this.def[2][ 1 +"_"+ 2 ] = 1;
+
+    // rotation 3
+    
+    this.def[3][ 0 +"_"+ 1 ] = 1;
+    this.def[3][ 1 +"_"+ 1 ] = 1;
+    this.def[3][ 2 +"_"+ 1 ] = 1;
+
+    this.def[3][ 2 +"_"+ 0 ] = 1;
+}
+
+figures.jter = new JTerm();
+
+function STerm()
+{
+    this.size = { x:3 , y:2 };
+    this.rotations = 2;
+
+    this.def = [ [] , [] ];
+
+    // rotation 0
+    this.def[0][ 0 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    this.def[0][ 1 +"_"+ 1 ] = 1;
+    this.def[0][ 2 +"_"+ 1 ] = 1;
+    
+    // rotation 1
+    this.def[1][ 0 +"_"+ 1 ] = 1;
+    this.def[1][ 0 +"_"+ 2 ] = 1;
+    this.def[1][ 1 +"_"+ 1 ] = 1;
+    this.def[1][ 1 +"_"+ 0 ] = 1;
+}
+
+figures.ster = new STerm();
 
 
-*/
+function ZTerm()
+{
+    this.size = { x:3 , y:2 };
+    this.rotations = 2;
+
+    this.def = [ [] , [] ];
+
+    // rotation 0
+    this.def[0][ 1 +"_"+ 0 ] = 1;
+    this.def[0][ 2 +"_"+ 0 ] = 1;
+    this.def[0][ 0 +"_"+ 1 ] = 1;
+    this.def[0][ 1 +"_"+ 1 ] = 1;
+    
+    // rotation 1
+    this.def[1][ 0 +"_"+ 0 ] = 1;
+    this.def[1][ 1 +"_"+ 0 ] = 1;
+    this.def[1][ 1 +"_"+ 1 ] = 1;
+    this.def[1][ 1 +"_"+ 2 ] = 1;
+}
+
+
+figures.zter = new ZTerm();
+
 
 // Create the method to generate figures in matrix
 // figureName: [oter, iter, tter, ...]
 // position: {x:0,y:0};
 
-function addFigure(figureName,position) 
+function addFigure(figureName,position, rotation) 
 {
+
+    rotation = rotation || 0;
+
     var size = figures[figureName].size;
 
     // change the y position to start the draw in cartesian coordinates
@@ -113,7 +240,7 @@ function addFigure(figureName,position)
         for(var j = 0; j < size.y; j+= 1) 
         {
             m[(position.x + i)+'_'+(position.y + j) ] = 
-                 figures[figureName].def[0][ i + "_" + j];
+                 figures[figureName].def[rotation][ i + "_" + j];
         }
     }
 
@@ -170,14 +297,13 @@ function drawMatrixInHTML()
 $(document).ready(function(){
     drawHTMLMatrix();
 
-    addFigure('oter', {x:0,y:19} );
+    addFigure('oter', {x:4,y:16} );
+    addFigure('iter', {x:4,y:10} );
+    addFigure('tter', {x:6,y:3} );
+    addFigure('lter', {x:5,y:8} );
+    addFigure('jter', {x:2,y:8} );
+    addFigure('ster', {x:5,y:13} );
+    addFigure('zter', {x:1,y:13} );
 
-    var moveY = 1;
-    setInterval(function(){
-        addFigure('oter', {x:5,y:moveY} );
-        moveY+=1;
-        drawMatrixInHTML();
-    },1000);
-    
     drawMatrixInHTML();
 });

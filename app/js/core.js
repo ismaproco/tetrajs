@@ -56,11 +56,24 @@ function ITerm(){
 
 }
 
+// The T figure is a 3x3 grid
+// and they rotate from the center of the grid
+//           _ _ _      _ _ _
+//        1 |_|_|_|  2 |x|_|_|
+//          |_|x|_|    |x|x|_|
+//          |x|x|x|    |x|_|_|
+//           ¯ ¯ ¯
+//           _ _ _      _ _ _
+//        4 | |x|_|  3 |_| |_|
+//          |x|x|_|    |x|x|x|
+//          | |x| |    |_|x|_|
+//           ¯ ¯ ¯
+
 figures.iter = new ITerm();
 
 
 function TTerm(){
-    this.size = { x:3 , y:2 };
+    this.size = { x:3 , y:3 };
     this.rotations = 4;
 
     this.def = [ [] , [] , [] , [] ];
@@ -81,27 +94,42 @@ function TTerm(){
 
     // rotation 2
     
-    this.def[2][ 1 +"_"+ 0 ] = 1;
-    
-    this.def[2][ 0 +"_"+ 1 ] = 1;
     this.def[2][ 1 +"_"+ 1 ] = 1;
-    this.def[2][ 2 +"_"+ 1 ] = 1;
+    
+    this.def[2][ 0 +"_"+ 2 ] = 1;
+    this.def[2][ 1 +"_"+ 2 ] = 1;
+    this.def[2][ 2 +"_"+ 2 ] = 1;
 
     // rotation 3
     
-    this.def[3][ 0 +"_"+ 1 ] = 1;
-    
-    this.def[3][ 1 +"_"+ 0 ] = 1;
     this.def[3][ 1 +"_"+ 1 ] = 1;
-    this.def[3][ 1 +"_"+ 2 ] = 1;
+    
+    this.def[3][ 2 +"_"+ 0 ] = 1;
+    this.def[3][ 2 +"_"+ 1 ] = 1;
+    this.def[3][ 2 +"_"+ 2 ] = 1;
 
 }
 
 figures.tter = new TTerm();
 
+// The L figure is a 3x3 grid
+// and they rotate from the center of the grid
+//           _ _ _      _ _ _
+//        1 |_|x|_|  2 |x|x|x|
+//          |_|x|_|    |x|_|_|
+//          | |x|x|    |_|_|_|
+//           ¯ ¯ ¯
+//           _ _ _      _ _ _
+//        4 |_|_|_|  3 |x|x|_|
+//          |_|_|x|    |_|x|_|
+//          |x|x|x|    |_|x|_|
+//           ¯ ¯ ¯
+
+
+
 function LTerm()
 {
-    this.size = { x:2 , y:3 };
+    this.size = { x:3 , y:3 };
     this.rotations = 4;
 
     this.def = [ [] , [] , [] , [] ];
@@ -114,19 +142,19 @@ function LTerm()
     this.def[0][ 1 +"_"+ 0 ] = 1;
     
     // rotation 1
-    this.def[1][ 0 +"_"+ 0 ] = 1;
-
     this.def[1][ 0 +"_"+ 1 ] = 1;
-    this.def[1][ 1 +"_"+ 1 ] = 1;
-    this.def[1][ 2 +"_"+ 1 ] = 1;
+
+    this.def[1][ 0 +"_"+ 2 ] = 1;
+    this.def[1][ 1 +"_"+ 2 ] = 1;
+    this.def[1][ 2 +"_"+ 2 ] = 1;
 
     // rotation 2
     
-    this.def[2][ 1 +"_"+ 0 ] = 1;
-    this.def[2][ 1 +"_"+ 1 ] = 1;
-    this.def[2][ 1 +"_"+ 2 ] = 1;
+    this.def[2][ 2 +"_"+ 0 ] = 1;
+    this.def[2][ 2 +"_"+ 1 ] = 1;
+    this.def[2][ 2 +"_"+ 2 ] = 1;
 
-    this.def[2][ 0 +"_"+ 2 ] = 1;
+    this.def[2][ 1 +"_"+ 2 ] = 1;
 
     // rotation 3
     
@@ -134,10 +162,25 @@ function LTerm()
     this.def[3][ 1 +"_"+ 0 ] = 1;
     this.def[3][ 2 +"_"+ 0 ] = 1;
 
-    this.def[3][ 0 +"_"+ 1 ] = 1;
+    this.def[3][ 2 +"_"+ 1 ] = 1;
 }
 
 figures.lter = new LTerm();
+
+// The J figure is a 3x3 grid
+// and they rotate from the center of the grid
+//           _ _ _      _ _ _
+//        1 |_|x|_|  2 | | | |
+//          |_|x|_|    |x|_|_|
+//          |x|x| |    |x|x|x|
+//           ¯ ¯ ¯      ¯ ¯ ¯
+//           _ _ _      _ _ _
+//        4 |_|_|_|  3 |_|x|x|
+//          |x|x|x|    |_|x|_|
+//          | | |x|    |_|x|_|
+//           ¯ ¯ ¯
+
+
 
 function JTerm()
 {
@@ -179,6 +222,16 @@ function JTerm()
 
 figures.jter = new JTerm();
 
+// The S figure is a 3x3 grid
+// and they rotate from the center of the grid
+//           _ _ _      _ _ _
+//        1 |_|_|_|  2 |x| | |
+//          |_|x|x|    |x|x| |
+//          |x|x| |    | |x| |
+//           ¯ ¯ ¯      ¯ ¯ ¯
+
+
+
 function STerm()
 {
     this.size = { x:3 , y:2 };
@@ -200,6 +253,16 @@ function STerm()
 }
 
 figures.ster = new STerm();
+
+
+// The Z figure is a 3x3 grid
+// and they rotate from the center of the grid
+//           _ _ _      _ _ _
+//        1 |_|_|_|  2 | | |x|
+//          |x|x| |    |_|x|x|
+//          | |x|x|    | |x| |
+//           ¯ ¯ ¯      ¯ ¯ ¯
+
 
 
 function ZTerm()

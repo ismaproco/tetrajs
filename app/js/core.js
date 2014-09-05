@@ -358,10 +358,10 @@ function drawHTMLMatrix()
 
 function drawMatrixInHTML()
 {
-    for (var c = drawCache.length - 1; c >= 0; c--) {
+    /*for (var c = drawCache.length - 1; c >= 0; c--) {
         $('#m_' +drawCache[c]).attr('class','mcell');
     }
-    drawCache = [];
+    drawCache = [];*/
     
     for (var j = 0; j < 20; j++) {
         for (var i = 0; i < 10; i++) {
@@ -369,28 +369,59 @@ function drawMatrixInHTML()
             {
                 var cellId = i + '_' + j;
                 $('#m_' + cellId).addClass('red');
-                drawCache.push(cellId);
-                m[ cellId ] = 0;
+                //drawCache.push(cellId);
+                //m[ cellId ] = 0;
             }
         }
-    }
-
-    
+    }    
 }
 
 
-// Create the method to rotate figures
-// Create the method to move figures in the matrix
+// Main game loop
+// 1. generate a random term
+// 2. add the random term to the screen
+// 3. move the random term to the bottom each interval
+// 4. if the term reach a no advance position stop
+// 5. Validate if a new figure can be added
+//  5.1 (yes) start from step 1
+//  5.2 show game over
+
+function mainLoop()
+{
+
+    var figuresList = [
+                        'oter',
+                        'iter',
+                        'tter',
+                        'lter',
+                        'jter',
+                        'ster',
+                        'zter'
+                        ];
+
+
+    setInterval(function(){
+        //generate the figure Random Index
+        var rIndex = getRandomInt(0,figuresList.length);
+        console.log(rIndex);
+        addFigure(figuresList[rIndex], {x:4,y:19} , 0 );
+
+    },1000);
+}
+
+
 // Create the method to to remove lines
 // Create the method to keep the score
 
 
 $(document).ready(function(){
-    drawHTMLMatrix();
 
-    var rotation = 0;
+
+    drawHTMLMatrix();
+    mainLoop();
+
     setInterval(function(){
-        addFigure('oter', {x:4,y:16} , rotation );
+        /*addFigure('oter', {x:4,y:16} , rotation );
         addFigure('iter', {x:4,y:10} , rotation );
         addFigure('tter', {x:6,y:3}, rotation );
         addFigure('lter', {x:6,y:18}, rotation );
@@ -398,8 +429,9 @@ $(document).ready(function(){
         addFigure('ster', {x:5,y:14}, rotation );
         addFigure('zter', {x:1,y:13}, rotation );
 
-        rotation+=1;
+        rotation+=1;*/
         drawMatrixInHTML();
-    },500);
+    },16);
     
 });
+

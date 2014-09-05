@@ -399,13 +399,20 @@ function mainLoop()
                         'zter'
                         ];
 
+    var flagAddFigure = true;
 
     setInterval(function(){
-        //generate the figure Random Index
-        var rIndex = getRandomInt(0,figuresList.length);
-        console.log(rIndex);
-        addFigure(figuresList[rIndex], {x:4,y:19} , 0 );
 
+        if( flagAddFigure )
+        {
+            //generate the figure Random Index
+            var rIndex = getRandomInt(0,figuresList.length);
+            console.log(rIndex);
+            addFigure(figuresList[rIndex], {x:4,y:19} , 0 );    
+
+            flagAddFigure = false;
+        }
+        
     },1000);
 }
 

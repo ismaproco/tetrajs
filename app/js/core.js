@@ -7,7 +7,7 @@
 
 
 // Create a matrix of 10 columns x 20 rows
-var drawCache = [];
+var cellsCache = [];
 var m = {};
 
 function resetMatrix()
@@ -19,13 +19,24 @@ function resetMatrix()
     }    
 }
 
+function clearCache()
+{
+    for (var i = cellsCache.length - 1; i >= 0; i--) {
+        console.log('arim ' + m[cellsCache[i]]);
+        m[cellsCache[i]] = undefined;
+        console.log('arim ' + m[cellsCache[i]]);
+    }
+    cellsCache = [];
+}
+
+
 // Create the method to generate figures in matrix
 // figureName: [oter, iter, tter, ...]
 // position: {x:0,y:0};
 
 function addFigure(figureName, position, rot, temp ) 
 {
-
+    var newCells = [];
     var rotation = rot || 0;
     
     var size = {};
@@ -34,7 +45,6 @@ function addFigure(figureName, position, rot, temp )
     {
         rotation = rotation % figures[figureName].rotations;
     }
-
 
     if( rotation % 2 === 0 )
     {
@@ -57,112 +67,23 @@ function addFigure(figureName, position, rot, temp )
         {
             if(figures[figureName].def[rotation][ i + "_" + j] === 1)
             {
+                var cellId = (position.x + i)+'_'+(position.y + j);
+
                 if(!temp)
                 {
-                    m[(position.x + i)+'_'+(position.y + j) ] = 1;
+                    m[ cellId ] = 1;
                 }
                 else
                 {
-                    m[(position.x + i)+'_'+(position.y + j) ] = -1;
+                    m[ cellId ] = -1;
                 }
+
+                newCells.push(cellId);
             }
         }
     }
-}
 
-
-function drawHTMLMatrix() 
-{
-    var $cells = [];
-
-    for (var j = 19; j >= 0; j--) {
-        for (var i = 0; i < 10; i++) {
-
-            var $cell = $('<div></div>')
-                            .attr('id', 'm_' + i + '_' + j )
-                            .attr('class','mcell');
-
-            $cells.push( $cell );
-        }
-    }
-
-    $("#tetra-container").append( $cells );
-}
-
-function drawMatrixInHTML()
-{
-    /*for (var c = drawCache.length - 1; c >= 0; c--) {
-        $('#m_' +drawCache[c]).attr('class','mcell');
-    }
-    drawCache = [];*/
-    
-    for (var j = 0; j < 20; j++) {
-        for (var i = 0; i < 10; i++) {
-            var cellId = i + '_' + j;
-            
-            if( m[i+'_'+j] === 1 )
-            {
-                $('#m_' + cellId).addClass('red');
-                //drawCache.push(cellId);
-                //m[ cellId ] = 0;
-            }
-            else if(m[i+'_'+j] === -1)
-            {
-                $('#m_' + cellId).addClass('green');
-            }
-        }
-    }    
-}
-
-
-// Main game loop
-// 1. generate a random term
-// 2. add the random term to the screen
-// 3. move the random term to the bottom each interval
-// 4. if the term reach a no advance position stop
-// 5. Validate if a new figure can be added
-//  5.1 (yes) start from step 1
-//  5.2 show game over
-
-function mainLoop()
-{
-
-    var figuresList = [
-                        'oter',
-                        'iter',
-                        'tter',
-                        'lter',
-                        'jter',
-                        'ster',
-                        'zter'
-                        ];
-
-    var flagAddFigure = true;
-    var position = {x:4,y:19};
-    var rIndex = getRandomInt(0,figuresList.length);
-
-    setInterval(function(){
-
-        
-        var result = figureCanBeAdded( m, figuresList[rIndex] , position , 0 );
-
-        if( result )
-        {
-            addFigure(figuresList[rIndex], position , 0 ,true);
-        }
-        else
-        {
-            addFigure(figuresList[rIndex], position , 0 ,false);
-        }
-
-        if( flagAddFigure )
-        {
-            
-        }
-
-        console.log( result,position.y );
-        
-    },1000);
+    return newCells;
 }
 
 // Evaluate if a figure can be set in the specific position
@@ -209,6 +130,111 @@ function figureCanBeAdded( matrix , figureName , position , rot )
 
     return true;
 }
+
+
+
+
+function drawHTMLMatrix() 
+{
+    var $cells = [];
+
+    for (var j = 19; j >= 0; j--) {
+        for (var i = 0; i < 10; i++) {
+
+            var $cell = $('<div></div>')
+                            .attr('id', 'm_' + i + '_' + j )
+                            .attr('class','mcell');
+
+            $cells.push( $cell );
+        }
+    }
+
+    $("#tetra-container").append( $cells );
+}
+
+function drawMatrixInHTML()
+{
+    /*for (var c = drawCache.length - 1; c >= 0; c--) {
+        $('#m_' +drawCache[c]).attr('class','mcell');
+    }
+    drawCache = [];*/
+    
+    for (var j = 0; j < 20; j++) {
+        for (var i = 0; i < 10; i++) {
+            var cellId = i + '_' + j;
+            
+            if( m[i+'_'+j] === 1 )
+            {
+                $('#m_' + cellId).addClass('red');
+                //drawCache.push(cellId);
+                //m[ cellId ] = 0;
+            }
+            else if(m[i+'_'+j] === -1)
+            {
+                $('#m_' + cellId).addClass('green');
+            }
+            else
+            {
+                $('#m_' + cellId).removeClass('green red');
+            }
+        }
+    }
+}
+
+
+// Main game loop
+// 1. generate a random term
+// 2. add the random term to the screen
+// 3. move the random term to the bottom each interval
+// 4. if the term reach a no advance position stop
+// 5. Validate if a new figure can be added
+//  5.1 (yes) start from step 1
+//  5.2 show game over
+
+function mainLoop()
+{
+
+    var figuresList = [
+                        'oter',
+                        'iter',
+                        'tter',
+                        'lter',
+                        'jter',
+                        'ster',
+                        'zter'
+                        ];
+
+    var flagAddFigure = true;
+    var position = {x:4,y:19};
+    var rIndex = getRandomInt(0,figuresList.length);
+
+    setInterval(function(){
+        clearCache();
+
+        var result = figureCanBeAdded( m, figuresList[rIndex] , position , 0 );
+
+        if( result )
+        {
+            var addedCells = addFigure(figuresList[rIndex], position , 0 ,true);
+            cellsCache = addedCells.map(function(x){
+                return x;
+            });
+        }
+        else
+        {
+            addFigure(figuresList[rIndex], position , 0 ,false);
+        }
+
+        if( flagAddFigure )
+        {
+            
+        }
+
+        console.log( result,position.y );
+    },1000);
+}
+
+
 
 
 

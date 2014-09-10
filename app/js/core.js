@@ -22,9 +22,9 @@ function resetMatrix()
 function clearCache()
 {
     for (var i = cellsCache.length - 1; i >= 0; i--) {
-        console.log('arim ' + m[cellsCache[i]]);
+        
         m[cellsCache[i]] = undefined;
-        console.log('arim ' + m[cellsCache[i]]);
+        
     }
     cellsCache = [];
 }
@@ -39,6 +39,9 @@ function addFigure(figureName, position, rot, temp )
     var newCells = [];
     var rotation = rot || 0;
     
+    var posY = position.y;
+    var posX = position.x;
+
     var size = {};
     
     if( rotation >= figures[figureName].rotations )
@@ -59,7 +62,7 @@ function addFigure(figureName, position, rot, temp )
     
 
     // change the y position to start the draw in cartesian coordinates
-    position.y -= size.y - 1;
+    posY = posY - 1;
 
     for(var i = 0; i < size.x; i+= 1)
     {
@@ -67,7 +70,7 @@ function addFigure(figureName, position, rot, temp )
         {
             if(figures[figureName].def[rotation][ i + "_" + j] === 1)
             {
-                var cellId = (position.x + i)+'_'+(position.y + j);
+                var cellId = (posX + i)+'_'+(posY + j);
 
                 if(!temp)
                 {
@@ -76,9 +79,8 @@ function addFigure(figureName, position, rot, temp )
                 else
                 {
                     m[ cellId ] = -1;
+                    newCells.push(cellId);
                 }
-
-                newCells.push(cellId);
             }
         }
     }
@@ -115,13 +117,18 @@ function figureCanBeAdded( matrix , figureName , position , rot )
     
 
     // change the y position to start the draw in cartesian coordinates
-    posY -= size.y - 1;
+    posY = posY - 1;
 
     for(var i = 0; i < size.x; i+= 1)
     {
         for(var j = 0; j < size.y; j+= 1) 
         {
-            if( matrix[ (position.x + i) + '_' + (posY + j) ] === 1 )
+            if( matrix[ (posX + i) + '_' + (posY + j) ] === 1 )
+            {
+                return false;
+            }
+
+            if( (posY + j + 1) === 0)
             {
                 return false;
             }
@@ -219,9 +226,12 @@ function mainLoop()
             cellsCache = addedCells.map(function(x){
                 return x;
             });
+
+            position.y -= 1;
         }
         else
         {
+            position.y += 1;
             addFigure(figuresList[rIndex], position , 0 ,false);
         }
 
@@ -230,13 +240,9 @@ function mainLoop()
             
         }
 
-        console.log( result,position.y );
+        console.log( result , position.y );
     },1000);
 }
-
-
-
-
 
 // Create the method to to remove lines
 // Create the method to keep the score

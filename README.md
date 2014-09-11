@@ -3,6 +3,19 @@ TetraJS
 
 This is a tetris web application that simulates th famous tetris game, using js, html, css and the audio web api.
 
+TODO 10/09/2014
+--------
+
+- Refactor the core.js to request for the server information of the tetraJS board.
+- Draw the board in the screen each second.
+
+- Create a backend application that manage the service request.
+- The backend app is in charge of the tetrajs simulation
+- Which includes:
+	- Figure generation
+	- Figure collision detection
+	- Line scoring
+	- Score Management
 
 TODO 03-09-2014
 --------

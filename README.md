@@ -3,6 +3,11 @@ TetraJS
 
 This is a tetris web application that simulates th famous tetris game, using js, html, css and the audio web api.
 
+Created to folders, client where all the client code to communnicate with the REST API will reside, and the server folder where all the server code with the routes for the API will be.
+
+
+
+
 TODO 10/09/2014
 --------
 

@@ -8,6 +8,7 @@ describe('Open connection',function(){
 	beforeEach(function(done){
 		helper.openConnection(function(err, client){
 			result.err = err;
+			client.close();
 			done();
 		});
 	});

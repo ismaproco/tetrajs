@@ -1,24 +1,22 @@
 'use strict';
 
 var MongoClient = require('mongodb').MongoClient;
-var connectionString = 'mongodb://localhost/tetrajs';
-var mongoclient = new MongoClient( connectionString, {native_parser: true});
+var connectionString = 'mongodb://localhost:27017/tetrajs';
 
 
 function openConnection( callback )
 {
-	mongoclient.open( function( err, mongoclient ) {
-		
+	MongoClient.connect(connectionString, function( err, db ) {
         if( callback )
 		{
-			callback(err, mongoclient);	
+			callback(err, db);	
 		}
 	});
 }
 
 function closeConnection( callback )
 {
-	mongoclient.close( function( err, result ) {
+	db.close( function( err, result ) {
 		callback( err , result );
 	});	
 }
@@ -26,14 +24,14 @@ function closeConnection( callback )
 
 function getDocuments( collectionName, filter, callback )
 {
-    openConnection( function(err, mongoclient)
+    openConnection( function(err, db)
     {
-        var collection = mongoclient.collection( collectionName );
+        var collection = db.collection( collectionName );
 
         // Fetch all results
         collection.find(filter).toArray(function(err, documents) {
             
-            mongoclient.close();
+            db.close();
 
             if( callback )
             {
@@ -45,12 +43,12 @@ function getDocuments( collectionName, filter, callback )
 
 function insertDocument( collectionName, document , callback )
 {
-    openConnection( function(err, mongoclient)
+    openConnection( function(err, db)
     {
-        var collection = mongoclient.collection( collectionName );
+        var collection = db.collection( collectionName );
 
         collection.insert( document ,function(err, result) {
-            mongoclient.close();
+            db.close();
 
             if( callback )
             {
@@ -60,5 +58,10 @@ function insertDocument( collectionName, document , callback )
     });
 }
 
+var mongoHelper = {
+    openConnection: openConnection,
+    getDocuments: getDocuments,
+    insertDocument: insertDocument
+}
 
-module.exports = this;
+module.exports = mongoHelper;

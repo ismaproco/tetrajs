@@ -1,9 +1,7 @@
 'use strict';
 
 var MongoClient = require('mongodb').MongoClient;
-
 var connectionString = 'mongodb://localhost/tetrajs';
-
 var mongoclient = new MongoClient( connectionString, {native_parser: true});
 
 
@@ -53,7 +51,7 @@ function insertDocument( collectionName, document , callback )
 
         collection.insert( document ,function(err, result) {
             mongoclient.close();
-            
+
             if( callback )
             {
                 callback(err, result);
@@ -61,3 +59,6 @@ function insertDocument( collectionName, document , callback )
         });
     });
 }
+
+
+module.exports = this;

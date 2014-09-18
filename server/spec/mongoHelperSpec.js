@@ -36,12 +36,65 @@ describe('Insert Document',function(){
 	beforeEach(function(done){
 		helper.insertDocument('boards',board,function(err, internalResult){
 			result = internalResult;
+			result.err = err;
 			done();
 		});
 	});
 
 	it('The document is going to be inserted', function() {
-		expect(result.err).toEqual(null);
+		expect(result._id.length).toBeGreaterThan(0);
+	})
+
+	// Code to Execute after the async spec
+    afterEach(function(done) {
+      done();
+    });
+
+});
+
+
+describe('Insert Document',function(){
+	var result = {};
+	
+	var board = {
+			token:'main_board_1',
+			description: 'this is a board'
+		};
+
+	beforeEach(function(done){
+		helper.insertDocument('boards',board,function(err, internalResult){
+			result = internalResult;
+			result.err = err;
+			done();
+		});
+	});
+
+	it('One document is inserted', function() {
+		expect(result._id.length).toBeGreaterThan(0);
+	})
+
+	// Code to Execute after the async spec
+    afterEach(function(done) {
+      done();
+    });
+
+});
+
+
+
+describe('get Documents no filter',function(){
+	var result = {};
+	
+	beforeEach(function(done){
+		helper.getDocuments('boards',{},function(err, internalResult){
+			result = internalResult;
+			result.err = err;
+			done();
+		});
+	});
+
+	it('Get more than one document from the database', function() {
+		expect(result.length).toBeGreaterThan(0);
 	})
 
 	// Code to Execute after the async spec

@@ -35,7 +35,7 @@ function getDocuments( collectionName, filter, callback )
 
             if( callback )
             {
-                callback( documents );
+                callback(err, documents );
             }
         });    
     });

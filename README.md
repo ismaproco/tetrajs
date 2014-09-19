@@ -6,7 +6,14 @@ This is a tetris web application that simulates th famous tetris game, using js,
 Created to folders, client where all the client code to communnicate with the REST API will reside, and the server folder where all the server code with the routes for the API will be.
 
 
+TODO 18/09/2014
+--------
 
+- Added logic verbose for the corejs
+- Added Board to class to manage the board operation using prototypes
+- Complete the core.js logic
+- link the routes.js with the core.js app
+- previous TODO keep appliying
 
 TODO 10/09/2014
 --------

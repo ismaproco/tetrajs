@@ -25,7 +25,9 @@ Board.prototype.initBoard= function initBoard(){
 		for(var j = 0; j < 20; j++){
 			this.board["c_"+i+"_r_"+j] = 0;
 		}
-	};
+	}
+
+	return this;
 };
 
 Board.prototype.getBoard = function getBoard(){

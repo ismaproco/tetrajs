@@ -1,4 +1,5 @@
 var express = require('express');
+var core = require('../bin/core.js');
 var router = express.Router();
 
 /* GET home page. */
@@ -8,8 +9,13 @@ router.get('/', function(req, res) {
 
 
 /* GET Start Game */
-router.get('/startGame', function(req, res) {
-  
+router.get('/createGame', function(req, res) {
+    var result = {
+        token: core.createGame( req.user )
+    };
+
+  res.write( JSON.stringify( result ) );
+  res.end();
 });
 
 /* GET getBoards */

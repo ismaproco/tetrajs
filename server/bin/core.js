@@ -5,6 +5,12 @@ var Board = require('./Board');
 var util = require('./util');
 var tetraCollectionName = 'tetra';
 
+//Core Object
+function Core()
+{
+
+}
+
 // Function that creates the game
 // Each token represent a current game per user
 // this tokens must be unique
@@ -13,7 +19,7 @@ var tetraCollectionName = 'tetra';
 // a new mongo collection is created with the token
 // this collection has all the plays for each one of the 
 // boards
-function createGame(user, callback)
+Core.prototype.createGame = function createGame(user, callback)
 {
 	// Get current time in milliseconds
 	var time = new Date().getTime()
@@ -28,13 +34,22 @@ function createGame(user, callback)
 	}
 
 	// Saves collection in the db
+	if( callback )
+	{
+		mongo.insertDocument(token,collection, function(err, result)
+		{
+			callback(err, result);
+		});
+	}
+	else
+	{
+		mongo.insertDocument(token,collection);	
+	}
+	
 
 	// return the token
 	return token;
 }
-
-
-
 
 // game logic
 // A user create a game
@@ -43,3 +58,6 @@ function createGame(user, callback)
 //		and an empty board
 // the server returns the token.
 // TODO: Complete the server logic for the plays
+
+
+modules.export = new Core();

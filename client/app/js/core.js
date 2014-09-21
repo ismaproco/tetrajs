@@ -220,7 +220,7 @@ function mainLoop()
 
         var result = figureCanBeAdded( m, figuresList[rIndex] , position , 0 );
 
-        if( result )
+        if( result)
         {
             var addedCells = addFigure(figuresList[rIndex], position , 0 ,true);
             cellsCache = addedCells.map(function(x){
@@ -229,15 +229,11 @@ function mainLoop()
 
             position.y -= 1;
         }
-        else
+        else if(flagAddFigure)
         {
             position.y += 1;
             addFigure(figuresList[rIndex], position , 0 ,false);
-        }
-
-        if( flagAddFigure )
-        {
-            
+            flagAddFigure = false;
         }
 
         console.log( result , position.y );

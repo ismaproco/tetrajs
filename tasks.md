@@ -22,7 +22,7 @@ Tasks
   - [ ] Create the request POST in the routes for the user edit 
   - [ ] Create the request POST in the routes for the user add
 - [ ] Create route for the Game creation
-  - [ ] Create the helper to get the token, and create the game
+  - [x] Create the helper to get the token, and create the game
   - [ ] Create the request GET in the routes of the express
   - [ ] Create the request GET board operation
   - [ ] Create the POST generate figure operation

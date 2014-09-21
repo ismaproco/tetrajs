@@ -21,4 +21,4 @@ util.generateRandomString = function randomString( charLength )
     return text;
 }
 
-modules.export = util;
+module.exports = util;

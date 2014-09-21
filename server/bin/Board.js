@@ -35,4 +35,4 @@ Board.prototype.getBoard = function getBoard(){
 };
 
 
-modules.export = Board;
+module.exports = Board;

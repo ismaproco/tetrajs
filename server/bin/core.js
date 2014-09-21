@@ -30,7 +30,7 @@ Core.prototype.createGame = function createGame(user, callback)
 	var collection = {
 		time: time,
 		token: token,
-		board: new Board().initBoard();
+		board: new Board().initBoard()
 	}
 
 	// Saves collection in the db
@@ -60,4 +60,4 @@ Core.prototype.createGame = function createGame(user, callback)
 // TODO: Complete the server logic for the plays
 
 
-modules.export = new Core();
+module.exports = new Core();

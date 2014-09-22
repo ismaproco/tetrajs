@@ -27,29 +27,45 @@ Core.prototype.createGame = function createGame(user, callback)
 	// and a the time in millis
 	var token = util.generateRandomString( 32 ) + time; 
 
-	var collection = {
+	var doc = {
 		time: time,
 		token: token,
-		board: new Board().initBoard()
+		board: new Board().initBoard(),
+		user: user
 	}
 
 	// Saves collection in the db
 	if( callback )
 	{
-		mongo.insertDocument(token,collection, function(err, result)
+		mongo.insertDocument(token,doc, function(err, result)
 		{
 			callback(err, result);
 		});
 	}
 	else
 	{
-		mongo.insertDocument(token,collection);	
+		mongo.insertDocument( token, doc );	
 	}
 	
 
 	// return the token
 	return token;
 }
+
+Core.prototype.getBoards = function getBoards( token, callback )
+{
+	//get the last inserted id
+	var options = { 'limit':1 , 'sort' : [ ['_id','desc'] ] };
+
+	mongo.getDocuments( token, {}, options, function(err, documents){
+
+		if( callback )
+		{
+			callback( err, documents );
+		}
+	});
+}
+
 
 // game logic
 // A user create a game

@@ -22,14 +22,14 @@ function closeConnection( callback )
 }
 
 
-function getDocuments( collectionName, filter, callback )
+function getDocuments( collectionName, filter, options, callback )
 {
     openConnection( function(err, db)
     {
         var collection = db.collection( collectionName );
 
         // Fetch all results
-        collection.find(filter).toArray(function(err, documents) {
+        collection.find( filter, options ).toArray(function(err, documents) {
             
             db.close();
 
@@ -58,10 +58,28 @@ function insertDocument( collectionName, document , callback )
     });
 }
 
+function removeDocuments( collectionName, filter, options, callback )
+{
+    openConnection(function( err, db ){
+        var collection = db.collection( collectionName );
+
+        collection.remove(filter,options, function(err, removedDocuments){
+            db.close();
+
+            if( callback )
+            {
+                callback( err , removedDocuments );
+            }
+        })
+
+    });
+}
+
 var mongoHelper = {
     openConnection: openConnection,
     getDocuments: getDocuments,
-    insertDocument: insertDocument
+    insertDocument: insertDocument,
+    removeDocuments: removeDocuments
 }
 
 module.exports = mongoHelper;

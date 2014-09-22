@@ -53,11 +53,11 @@ describe('Insert Document',function(){
 
 });
 
-describe('get Documents no filter',function(){
+describe('get Documents no filter, no options',function(){
 	var result = {};
 	
 	beforeEach(function(done){
-		helper.getDocuments('boards',{},function(err, internalResult){
+		helper.getDocuments('boards',{},{},function(err, internalResult){
 			result = internalResult;
 			result.err = err;
 			done();
@@ -67,6 +67,31 @@ describe('get Documents no filter',function(){
 	it('Get more than zero documents from the database', function() {
 		expect(result.err).toEqual(null);
 		expect(result.length).toBeGreaterThan(0);
+	})
+
+	// Code to Execute after the async spec
+    afterEach(function(done) {
+      done();
+    });
+
+});
+
+
+describe('remove all Documents no filter, no options',function(){
+	var result = {};
+	
+	beforeEach(function(done){
+		helper.removeDocuments('boards',{},{},function(err, internalResult){
+			result.removedDocuments = internalResult;
+			result.err = err;
+			done();
+		});
+	});
+
+	it('Get more than zero documents from the database', function() {
+		expect(result.err).toEqual(null);
+		console.log(result);
+		expect(result.removedDocuments).toBeGreaterThan(0);
 	})
 
 	// Code to Execute after the async spec

@@ -4,12 +4,17 @@ TetraJS
 
 Welcome: @antoRG2 @edgarss87 @walterwabe
 
-
-
-
 This is a tetris web application that simulates th famous tetris game, using js, html, css and the audio web api.
 
 Created to folders, client where all the client code to communnicate with the REST API will reside, and the server folder where all the server code with the routes for the API will be.
+
+TODO 22-09-2014
+---------
+
+- Added task.md file to keep track of the the development task.
+- Added READMEs to the client, and server folders.
+- Fill each one of the readmes with the requirements to execute the projects
+
 
 
 TODO 18-09-2014
